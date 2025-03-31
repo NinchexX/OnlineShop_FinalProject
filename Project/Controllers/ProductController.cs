@@ -56,6 +56,7 @@ namespace Project.Controllers
         }
 
         [HttpPost("RateProduct")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> RateProduct(RateProductDTO request)
         {
             await _productService.RateProduct(request);
