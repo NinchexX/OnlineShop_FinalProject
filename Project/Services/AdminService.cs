@@ -12,12 +12,14 @@ namespace Project.Services
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ProjectDbContext _projectDbContext;
+        private readonly IEmailSender _emailSender;
 
-        public AdminService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ProjectDbContext projectDbContext)
+        public AdminService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, ProjectDbContext projectDbContext, Interfaces.IEmailSender emailSender)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _projectDbContext = projectDbContext;
+            _emailSender = emailSender;
         }
 
         public async Task CreateUser(string username, string email, string password, string firstName, string lastName, string role)
@@ -42,6 +44,10 @@ namespace Project.Services
             {
                 throw new Exception("Failed to assign role: " + string.Join(", ", result.Errors));
             }
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+            await _emailSender.SendEmailAsync(email, token);
         }
 
         public async Task AssignRoleToUser(string id, string role)
