@@ -91,6 +91,7 @@ namespace Project
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<IBasketService, BasketService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
+            builder.Services.AddScoped<IOrderingService, OrderingService>();
 
 
             builder.Services.AddAuthorization();
