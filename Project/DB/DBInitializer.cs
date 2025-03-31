@@ -55,6 +55,8 @@ namespace Project.DB
 
             var user = new User("admin@gmail.com", "admin", "Admin", "istrator");
 
+            user.EmailConfirmed = true;
+
             await userManager.CreateAsync(user, "Test1234!");
 
             await userManager.AddToRoleAsync(user, "Admin");

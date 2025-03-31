@@ -39,9 +39,9 @@ namespace Project.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDTO request)
+        public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductDTO request)
         {
             await _productService.UpdateProduct(request);
             return Ok();

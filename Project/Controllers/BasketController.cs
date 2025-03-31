@@ -33,9 +33,9 @@ namespace Project.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> UpdateBasket(int id, [FromBody] UpdateBasketRequestDTO request)
+        public async Task<IActionResult> UpdateBasket([FromBody] UpdateBasketRequestDTO request)
         {
             await _basketService.UpdateBasket(request);
             return Ok();

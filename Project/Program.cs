@@ -58,11 +58,9 @@ namespace Project
 
             builder.Services.AddDbContext<ProjectDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            builder.Services.AddScoped<IEmailSender, EmailSender>();
-
             builder.Services.AddIdentity<User, IdentityRole>(options =>
             {
-                //options.SignIn.RequireConfirmedEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.Password.RequiredLength = 8;
             })
             .AddEntityFrameworkStores<ProjectDbContext>()
@@ -92,6 +90,7 @@ namespace Project
             builder.Services.AddScoped<IBasketService, BasketService>();
             builder.Services.AddScoped<IAdminService, AdminService>();
             builder.Services.AddScoped<IOrderingService, OrderingService>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 
             builder.Services.AddAuthorization();
