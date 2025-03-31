@@ -20,7 +20,7 @@ namespace Project.Services
             _projectDbContext = projectDbContext;
         }
 
-        public async Task CreateUser(string username, string email, string password, string role)
+        public async Task CreateUser(string username, string email, string password, string firstName, string lastName, string role)
         {
             var roleExists = await _roleManager.RoleExistsAsync(role);
             if (!roleExists)
@@ -28,7 +28,7 @@ namespace Project.Services
                 throw new Exception($"Role '{role}' does not exist.");
             }
 
-            var user = new User { UserName = username, Email = email };
+            var user = new User { UserName = username, Email = email, FirstName = firstName, LastName = lastName };
             var result = await _userManager.CreateAsync(user, password);
 
             if (!result.Succeeded)

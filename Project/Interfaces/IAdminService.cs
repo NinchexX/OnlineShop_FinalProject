@@ -5,7 +5,7 @@ namespace Project.Interfaces
 {
     public interface IAdminService
     {
-        Task CreateUser(string username, string email, string password, string role);
+        Task CreateUser(string username, string email, string password, string firstName, string lastName, string role);
         Task AssignRoleToUser(string id, string role);
         Task EditUser(string id, string firstName, string lastName);
         Task<GetRatingsDTO> GetRatings(int id);
