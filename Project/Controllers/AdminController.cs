@@ -19,7 +19,7 @@ namespace Project.Controllers
         [HttpPost("CreateUser")]
         public async Task<IActionResult> CreateUser(string username, string email, string password, string firstName, string lastName, string role)
         {
-            await _adminService.CreateUser(username, email, password, firstName, lastName role);
+            await _adminService.CreateUser(username, email, password, firstName, lastName, role);
             return Ok();
         }
 
