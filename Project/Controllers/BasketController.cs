@@ -8,6 +8,7 @@ namespace Project.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "User")]
     public class BasketController : ControllerBase
     {
         private readonly IBasketService _basketService;
@@ -18,7 +19,6 @@ namespace Project.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetBasket()
         {
             var products = await _basketService.GetBasket();
@@ -26,7 +26,6 @@ namespace Project.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> AddToBasket([FromBody] AddToBasketRequestDTO request)
         {
             await _basketService.AddToBasket(request);
@@ -34,7 +33,6 @@ namespace Project.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> UpdateBasket([FromBody] UpdateBasketRequestDTO request)
         {
             await _basketService.UpdateBasket(request);
@@ -42,7 +40,6 @@ namespace Project.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteBasket(int id)
         {
             await _basketService.DeleteBasket(id);
